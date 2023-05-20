@@ -32,9 +32,9 @@
 
     <li>
         <form action="/complete" method="POST">
-            <input type="hidden" name="complete" value="<%= index %>">
-            <button type=" submit"> <% if (element.completed) { %> NOT DONE <% } else {%> DONE
-                <%} %></button>
+            <input type="hidden" name="complete" id="" value="<%= index %>">
+            <input type="checkbox" onchange="this.form.submit()" <% if (element.completed) { %> checked <% }  %>>
+
             <span class=" <%= element.completed ? 'completed' : '' %>"><%= element.task %></span>
         </form>
     </li>

@@ -49,7 +49,6 @@ app.post("/remove-todo", (req, res) => {
 app.post('/complete', (req, res) => {
     console.log('completed:' + req.body.complete);
     const completeindex = parseInt(req.body.complete);
-    // todos[completedIndex].completed = !todos[completedIndex].completed;
     todos[completeindex].completed = !todos[completeindex].completed;
     res.redirect('/');
 });
