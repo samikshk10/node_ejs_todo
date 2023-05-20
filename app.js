@@ -42,7 +42,7 @@ app.post("/add-todo", (req, res) => {
 })
 app.post("/remove-todo", (req, res) => {
     console.log(req.body.delete);
-
+    todos.splice(req.body.delete, 1);
     res.redirect("/");
 })
 

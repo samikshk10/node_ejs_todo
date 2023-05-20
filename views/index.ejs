@@ -27,16 +27,16 @@
     </form>
 
     <% items.forEach((element,index) =>{%>
-    <!-- <li><%= element  %><button formaction="/remove-todo" name="delete" value="<% index %>"
-                type="submit">Remove</button></li> -->
+
 
     <li>
         <form action="/complete" method="POST">
             <input type="hidden" name="complete" id="" value="<%= index %>">
             <input type="checkbox" onchange="this.form.submit()" <% if (element.completed) { %> checked <% }  %>>
-
             <span class=" <%= element.completed ? 'completed' : '' %>"><%= element.task %></span>
-        </form>
+            <button formaction="/remove-todo" name="delete" value="<%= index %>" type="submit">Remove</button>
+    </li>
+    </form>
     </li>
     <%}) %>
 
