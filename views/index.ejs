@@ -6,6 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="assets/css/navbar.css" />
+
 
     <style>
         .completed {
@@ -20,26 +22,55 @@
 </head>
 
 <body>
-    <h1>TODO APPLICATION</h1>
-    <form action="/add-todo" method="post">
-        <input type="text" name="todo" placeholder="Enter todo">
-        <button type="submit">Add</button>
-    </form>
+    <nav>
+        <div class="navbar">
+            <div class="navbar__container">
+                <ul class="navbar__items">
+                    <div>
+                        <%= username %>
+                    </div>
+                    <div class="navbar__item">
+                        <a href="/logout">
+                            <li>Logout</li>
+                        </a>
+                    </div>
+                </ul>
+            </div>
 
-    <% items.forEach((element,index) =>{%>
+        </div>
+
+    </nav>
+    <div class="todo-app">
 
 
-    <li>
-        <form action="/complete" method="POST">
-            <input type="hidden" name="complete" id="" value="<%= index %>">
-            <input type="checkbox" onchange="this.form.submit()" <% if (element.completed) { %> checked <% }  %>>
-            <span class=" <%= element.completed ? 'completed' : '' %>"><%= element.task %></span>
-            <button formaction="/remove-todo" name="delete" value="<%= index %>" type="submit">Remove</button>
-    </li>
-    </form>
-    </li>
-    <%}) %>
+        <h1>TODO APPLICATION</h1>
 
+        <% if (msg) { %>
+        <div class="alert"><%= msg %></div>
+        <% } %>
+
+        <form action="/todo/add-todo" class="form-add" method="post">
+            <input type="text" name="title" placeholder="Enter todo">
+            <button type="submit">Add</button>
+        </form>
+
+        <% items.forEach((element,index) =>{%>
+
+
+        <li>
+            <form action="/todo/complete-todo" method="post" class="display-todo">
+                <input type="hidden" name="complete" id="" value="<%= element.id %>">
+                <input type="checkbox" onchange="this.form.submit()" <% if (element.completed) { %> checked <% }  %>>
+                <span class=" <%= element.completed ? 'completed' : '' %>"><%= element.title %></span>
+                <button formaction="/todo/edit-todo/<%= element.id %>" name="edit" type="submit">Edit</button>
+                <button formaction="/todo/remove-todo/<%= element.id %>" name="delete" type="submit">Remove</button>
+        </li>
+        </form>
+        </li>
+        <%}) %>
+
+
+    </div>
 </body>
 
 </html>
